@@ -128,6 +128,16 @@ Formato de resposta das APIs, incluindo dados de usuários, roles e timestamps.
 
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/02e0887e-3c59-4a5a-8c1e-8caf885187ef" />
 
+#### ⚠️ Exceção: e-mail inválido
+Quando o e-mail informado não é válido, a API retorna um JSON de erro, por exemplo:
+
+{
+    "email": "deve ser um endereço de e-mail bem formado"
+}
+
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/f1341b65-99eb-4241-8687-7449478fa9dc" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/1d8414f1-45e9-4069-835a-0c15fc4eda51" />
+
 
 ![JSON Output](caminho/para/imagem-json.png)
 
