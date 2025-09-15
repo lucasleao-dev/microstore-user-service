@@ -1,0 +1,45 @@
+package com.microstore.users.service;
+
+import com.microstore.users.model.User;
+import com.microstore.users.repository.UserRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class UserService {
+
+    private final UserRepository repository;
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
+
+    public User createUser(User user) {
+        if (repository.existsByEmail(user.getEmail())) {
+            throw new IllegalArgumentException("Email já cadastrado");
+        }
+        return repository.save(user);
+    }
+
+    public List<User> getAllUsers() {
+        return repository.findAll();
+    }
+
+    public Optional<User> getUserById(Long id) {
+        return repository.findById(id);
+    }
+
+    public User updateUser(Long id, User userDetails) {
+        User user = repository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+        user.setName(userDetails.getName());
+        user.setEmail(userDetails.getEmail());
+        return repository.save(user);
+    }
+
+    public void deleteUser(Long id) {
+        repository.deleteById(id);
+    }
+}

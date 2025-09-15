@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  notification-service:
+    build: ./microstore-notification-service
+    container_name: notification-service
+    ports:
+      - "8082:8080"   # expõe a porta do serviço
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://notification-db:5432/notificationdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    depends_on:
+      - notification-db
+
+  notification-db:
+    image: postgres:15
+    container_name: notification-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: notificationdb
+    ports:
+      - "5433:5432"   # mapeia a porta do banco para host
+    volumes:
+      - ./data/notification-db:/var/lib/postgresql/data

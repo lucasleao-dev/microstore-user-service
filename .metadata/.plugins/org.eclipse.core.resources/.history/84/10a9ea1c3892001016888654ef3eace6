@@ -1,0 +1,77 @@
+package com.payment.service.dto;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.payment.service.dto.PaymentRequest;
+import com.payment.service.dto.PaymentResponse;
+import com.payment.service.service.PaymentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("/payments")
+public class PaymentController {
+
+    private final PaymentService service;
+    private final ObjectMapper objectMapper;
+    private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
+
+    public PaymentController(PaymentService service) {
+        this.service = service;
+        this.objectMapper = new ObjectMapper();
+    }
+
+    @PostMapping
+    public PaymentResponse createPayment(@RequestBody PaymentRequest request) {
+        try {
+            logger.info("Recebido POST /payments com request: {}", objectMapper.writeValueAsString(request));
+        } catch (JsonProcessingException e) {
+            logger.warn("Erro ao converter PaymentRequest para JSON", e);
+        }
+
+        PaymentResponse response = service.createPayment(request);
+
+        try {
+            logger.info("Pagamento criado: {}", objectMapper.writeValueAsString(response));
+        } catch (JsonProcessingException e) {
+            logger.warn("Erro ao converter PaymentResponse para JSON", e);
+        }
+
+        return response;
+    }
+
+    @GetMapping("/{id}")
+    public PaymentResponse getPayment(@PathVariable Long id) {
+        logger.info("Recebido GET /payments/{}", id);
+
+        PaymentResponse response = service.getPaymentById(id);
+
+        try {
+            logger.info("Pagamento retornado: {}", objectMapper.writeValueAsString(response));
+        } catch (JsonProcessingException e) {
+            logger.warn("Erro ao converter PaymentResponse para JSON", e);
+        }
+
+        return response;
+    }
+
+    @GetMapping
+    public List<PaymentResponse> getAllPayments() {
+        logger.info("Recebido GET /payments");
+
+        List<PaymentResponse> responses = service.getAllPayments();
+
+        try {
+            String jsonList = objectMapper.writeValueAsString(responses);
+            logger.info("Pagamentos retornados: {}", jsonList);
+        } catch (JsonProcessingException e) {
+            logger.warn("Erro ao converter lista de PaymentResponse para JSON", e);
+        }
+
+        return responses;
+    }
+}

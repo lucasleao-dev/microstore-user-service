@@ -1,0 +1,5 @@
+package com.microstore.users.service;
+
+public class UserService {
+
+}

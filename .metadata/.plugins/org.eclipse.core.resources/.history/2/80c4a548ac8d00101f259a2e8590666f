@@ -1,0 +1,4 @@
+spring.application.name=order-service
+spring.jackson.serialization.WRITE_DATES_AS_TIMESTAMPS=false
+spring.jackson.time-zone=America/Sao_Paulo
+spring.mvc.pathmatch.matching-strategy=ANT_PATH_MATCHER

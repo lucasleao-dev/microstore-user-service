@@ -1,0 +1,44 @@
+package com.payment.service.service.impl;
+
+import com.payment.service.dto.PaymentRequest;
+import com.payment.service.dto.PaymentResponse;
+import com.payment.service.entity.Payment;
+import com.payment.service.repository.PaymentRepository;
+import com.payment.service.service.PaymentService;
+import com.payment.service.util.PaymentMapper;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class PaymentServiceImpl implements PaymentService {
+
+    private final PaymentRepository repository;
+
+    public PaymentServiceImpl(PaymentRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public PaymentResponse createPayment(PaymentRequest request) {
+        Payment payment = PaymentMapper.toEntity(request);
+        payment = repository.save(payment);
+        return PaymentMapper.toDto(payment);
+    }
+
+    @Override
+    public PaymentResponse getPaymentById(Long id) {
+        return repository.findById(id)
+                .map(PaymentMapper::toDto)
+                .orElseThrow(() -> new RuntimeException("Payment not found"));
+    }
+
+    @Override
+    public List<PaymentResponse> getAllPayments() {
+        return repository.findAll()
+                .stream()
+                .map(PaymentMapper::toDto)
+                .collect(Collectors.toList());
+    }
+}

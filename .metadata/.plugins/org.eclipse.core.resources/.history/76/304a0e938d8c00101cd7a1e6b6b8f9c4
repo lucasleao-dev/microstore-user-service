@@ -1,0 +1,5 @@
+package com.microstore.products.entity;
+
+public class Product {
+
+}

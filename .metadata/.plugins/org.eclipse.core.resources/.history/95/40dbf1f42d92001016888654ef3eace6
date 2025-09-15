@@ -1,0 +1,28 @@
+spring.application.name=payment-service
+# Nome da aplicação
+spring.application.name=payment-service
+
+# H2 Database (em memória)
+spring.datasource.url=jdbc:h2:mem:paymentdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+
+# JPA / Hibernate
+spring.jpa.hibernate.ddl-auto=update   # update cria/atualiza tabelas automaticamente
+spring.jpa.show-sql=true               # mostra os comandos SQL no console
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
+
+# Console H2 (para acessar pelo navegador)
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+# DevTools
+spring.devtools.restart.enabled=true
+
+# Logging
+logging.level.org.springframework=INFO
+logging.level.com.payment.service=DEBUG
+
+# Validation (não precisa de configuração extra, só a dependência)

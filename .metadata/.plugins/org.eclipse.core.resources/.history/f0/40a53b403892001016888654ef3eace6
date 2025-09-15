@@ -1,0 +1,47 @@
+package com.payment.service.controller;
+
+import com.payment.service.dto.PaymentRequest;
+import com.payment.service.dto.PaymentResponse;
+import com.payment.service.service.PaymentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/payments")
+public class PaymentController {
+
+    private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
+
+    private final PaymentService service;
+
+    public PaymentController(PaymentService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public PaymentResponse createPayment(@RequestBody PaymentRequest request) {
+        logger.info("Requisição POST recebida: {}", request);
+        PaymentResponse response = service.createPayment(request);
+        logger.info("Pagamento criado com sucesso: {}", response);
+        return response;
+    }
+
+    @GetMapping("/{id}")
+    public PaymentResponse getPayment(@PathVariable Long id) {
+        logger.info("Requisição GET recebida para ID: {}", id);
+        PaymentResponse response = service.getPaymentById(id);
+        logger.info("Pagamento retornado: {}", response);
+        return response;
+    }
+
+    @GetMapping
+    public List<PaymentResponse> getAllPayments() {
+        logger.info("Requisição GET recebida para listar todos os pagamentos");
+        List<PaymentResponse> responseList = service.getAllPayments();
+        logger.info("Pagamentos retornados: {}", responseList);
+        return responseList;
+    }
+}

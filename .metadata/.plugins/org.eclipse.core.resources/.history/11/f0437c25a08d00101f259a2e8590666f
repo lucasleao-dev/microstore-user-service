@@ -1,0 +1,5 @@
+package com.microstore.orderservice.repository;
+
+public class OrderRepository {
+
+}

@@ -1,0 +1,5 @@
+package com.microstore.products.dto;
+
+public class ProductRequest {
+
+}

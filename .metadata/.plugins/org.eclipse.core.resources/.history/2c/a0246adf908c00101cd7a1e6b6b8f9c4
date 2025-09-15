@@ -1,0 +1,5 @@
+package com.microstore.products.controller;
+
+public class CategoryController {
+
+}

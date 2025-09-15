@@ -1,0 +1,5 @@
+package com.microstore.users.model;
+
+public class User {
+
+}

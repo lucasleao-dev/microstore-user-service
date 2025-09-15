@@ -1,0 +1,5 @@
+package com.microstore.users.controller;
+
+public class UserController {
+
+}

@@ -1,0 +1,5 @@
+package com.microstore.products;
+
+public class ProductServiceIntegrationTest {
+
+}

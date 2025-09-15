@@ -1,0 +1,5 @@
+package com.microstore.orderservice.service;
+
+public class OrderService {
+
+}

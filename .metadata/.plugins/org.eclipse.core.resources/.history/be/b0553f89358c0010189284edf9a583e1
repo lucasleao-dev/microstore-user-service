@@ -1,0 +1,13 @@
+package com.microstore.users;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class MicrostoreUserServiceApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
