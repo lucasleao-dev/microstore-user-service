@@ -7,7 +7,16 @@ import java.time.LocalDateTime;
 @Table(name = "reviews")
 public class Review {
 
-    @Id
+    public Review(Long id, String productId, String userId, String comment, int rating, LocalDateTime createdAt) {
+		super();
+		this.id = id;
+		this.productId = productId;
+		this.userId = userId;
+		this.comment = comment;
+		this.rating = rating;
+		this.createdAt = createdAt;
+	}
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -16,6 +25,18 @@ public class Review {
     private String comment;
     private int rating;       // nota de 1 a 5
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    // Construtor padrão (necessário para JPA)
+    public Review() {}
+
+    // Construtor útil para testes
+    public Review(String productId, String userId, String comment, int rating) {
+        this.productId = productId;
+        this.userId = userId;
+        this.comment = comment;
+        this.rating = rating;
+        this.createdAt = LocalDateTime.now();
+    }
 
     // Getters e Setters
     public Long getId() { return id; }
